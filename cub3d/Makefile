@@ -9,7 +9,8 @@ SRCS =  main.c	   \
 		ft_split.c	\
 		map.c		\
 		dfs.c		\
-		execution.c
+		execution.c \
+		execute.c
 
 GET_NEXT_LINE_SRC = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
