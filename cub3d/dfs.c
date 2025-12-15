@@ -13,8 +13,8 @@ int locate_player(t_game_data *data)
             if (data->map.map[y][x] == 'N' || data->map.map[y][x] == 'E' || 
                 data->map.map[y][x] == 'W' || data->map.map[y][x] == 'S')
             {   
-                data->player.x = x;
-                data->player.y = y;
+                data->player.x = x + 0.5;
+                data->player.y = y + 0.5;
                 data->player.direction = data->map.map[y][x];
                 data->player.player_count++;
             }
@@ -123,7 +123,7 @@ int validate_map_with_dfs(t_game_data *data)
         printf("[ERROR] Failed to allocate visited map\n");
         return (FAILURE);
     }
-    printf("Starting DFS validation from player position (%d, %d)...\n", 
+    printf("Starting DFS validation from player position (%f, %f)...\n", 
            data->player.x, data->player.y);
     result = dfs(data, visited, data->player.x, data->player.y);
     free_2d_array(visited);
