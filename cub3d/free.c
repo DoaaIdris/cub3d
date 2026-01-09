@@ -3,6 +3,7 @@
 void free_textures(t_game_data *data)
 {
     if (data->texture.north_texture)
+        // mlx_destroy_image(data->mlx, data->texture.north_texture);
         free(data->texture.north_texture);
     if (data->texture.south_texture)
         free(data->texture.south_texture);
@@ -20,7 +21,7 @@ void free_2d_array(char **string)
     if (!string)
         return;
     while(string[i])
-    {
+    {   
         free(string[i]);
         i++;
     }

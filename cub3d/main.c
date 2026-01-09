@@ -63,11 +63,8 @@ int main(int argc, char *argv[])
         }
         
         printf("✓ Map validation successful! Starting game...\n");
-        
-        // Start the game execution
         start_game(&data);
         
-        // Cleanup after game ends
         free_2d_array(data.map.map);
         free_textures(&data);
         get_next_line(42);

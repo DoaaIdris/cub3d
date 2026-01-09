@@ -12,43 +12,26 @@
 #define SUCCESS 1
 #define FAILURE 0
 #define CONTINUE -1
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
+#define SPEED 0.10    
+#define ROTATE_SPEED 0.10
 
 typedef struct s_image
 {
     void *img;
-    char *addr;
-    int bits_per_pixel;
-    int line_length;
-    int endian;
+    char *addr; //Pointer tp start of pixel data (our byte array)
+    int bits_per_pixel; //Bits per pixel (typ 32)
+    int line_length; //Bytes per row/line
+    int endian; //how color is stored in memory (typically 0 in linux/mac = BGRA) least sig byte first (rightmost)
 }   t_image;
 
-// typedef struct s_raycast
-// {
-//     double player_x;
-//     double player_y;
-//     double dir_x;
-//     double dir_y;
-//     double plane_x;
-//     double plane_y;
-//     double camera_x;
-//     double ray_dir_x;
-//     double ray_dir_y;
-//     int map_x;
-//     int map_y;
-//     double side_dist_x;
-//     double side_dist_y;
-//     double delta_dist_x;
-//     double delta_dist_y;
-//     double perp_wall_dist;
-//     int step_x;
-//     int step_y;
-//     int hit;
-//     int side;
-//     int line_height;
-//     int draw_start;
-//     int draw_end;
-//     void *img_data;
-// }   t_raycast;
+typedef struct s_tex
+{
+    t_image image;
+    int width;
+    int height;
+} t_tex;
 
 typedef struct s_map
 {
@@ -90,8 +73,8 @@ typedef struct s_player
     double y;
     int player_count;
     char direction;
-    int dir_x;
-    int dir_y;
+    double dir_x;
+    double dir_y;
     double plane_x;    //FIELD OF VIEW WIDTH
     double plane_y;   //FILED OF VIEW HEIGHT
 
@@ -109,7 +92,7 @@ typedef struct s_raycast
     double delta_dis_x; //DISTANCE RAY HAS TO TRAVEL TO GO TO NEXT X SIDE
     double delta_dis_y; //DISTANCE RAY HAS TO TRAVEL TO GO TO NEXT Y SIDE
     int hit;            //DETERMINES IF LOOP ENDS (WAS WALL HIT?)
-    int side;           //WAS THE WALL HIT FROM X SIDE (NS = 0) or Y SIDE (WE = 1)
+    int side;           //WAS THE WALL HIT FROM X SIDE (EW = 0) or Y SIDE (NS = 1)
     int step_x;        //DIRECTION TO STEP IN X DIRECTION
     int step_y;        //DIRECTION TO STEP IN Y DIRECTION
 } t_raycast;
@@ -128,6 +111,10 @@ typedef struct s_game_data
     int first_phase_done;
     int ceiling_set;
     int floor_set;
+    t_tex north;
+    t_tex south;
+    t_tex east;
+    t_tex west;
     
 }   t_game_data;
 
@@ -148,7 +135,6 @@ char	**ft_split(char const *s, char c);
 void	free_split_result(char **result);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
-
 //map.c
 char **validate_map(t_game_data *data,int fd);
 int char_patrol(char c);
@@ -167,13 +153,6 @@ char **create_visited_map(t_game_data *data);
 int validate_map_with_dfs(t_game_data *data);
 
 //execution.c
-// void init_player_direction(t_game_data *data);
-// void raycast(t_game_data *data, t_image *img);
-// void move_player(t_game_data *data, double move_x, double move_y);
-// void rotate_player(t_game_data *data, double angle);
-// int key_press(int keycode, t_game_data *data);
-// int game_loop(t_game_data *data);
-// int close_window(t_game_data *data);
 void start_game(t_game_data *data);
 
 #endif
