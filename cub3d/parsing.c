@@ -125,7 +125,7 @@ int validate_map_info(t_game_data *data, char *map_line)
         if (strncmp(map_line, textures[i].key, textures[i].key_len) == 0 
             && map_line[textures[i].key_len] == ' ')
         {
-        if (*textures[i].target)
+            if (*textures[i].target)
                 return (printf("Error: duplicate %s texture\n", textures[i].key), 0);
             *textures[i].target = strdup(find_texture_path(map_line));
             // printf("Loaded %s texture: [%s]\n", textures[i].key, *textures[i].target);

@@ -1,25 +1,26 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include <mlx.h>
+#include "minilibx-linux/mlx.h"
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include "get_next_line/get_next_line.h"
 #include <string.h>
+#include <math.h>
 
 #define SUCCESS 1
 #define FAILURE 0
 #define CONTINUE -1
 
-// typedef struct s_image
-// {
-//     void *img;
-//     char *addr;
-//     int bits_per_pixel;
-//     int line_length;
-//     int endian;
-// }   t_image;
+typedef struct s_image
+{
+    void *img;
+    char *addr;
+    int bits_per_pixel;
+    int line_length;
+    int endian;
+}   t_image;
 
 // typedef struct s_raycast
 // {
@@ -85,12 +86,33 @@ typedef struct s_texture
 
 typedef struct s_player
 {
-    int x;
-    int y;
+    double x;
+    double y;
     int player_count;
     char direction;
+    int dir_x;
+    int dir_y;
+    double plane_x;    //FIELD OF VIEW WIDTH
+    double plane_y;   //FILED OF VIEW HEIGHT
 
 }   t_player;
+
+typedef struct s_raycast
+{
+    double dir_x;      //RAY DIRECTION
+    double dir_y;
+    double camera_x;  //REPRESENTS HOW LEFT OR RIGHT RAY IS SHOOTING AT
+    int map_x;   //CURRENT SQUARE RAY IS IN (COORDINATES OF SQUARE)
+    int map_y;
+    double side_dis_x;  //INITIAL DISTANCE RAY HAS TO TRAVEL TO GO TO FIRST X SIDE
+    double side_dis_y;  //INITIAL DISTANCE RAY HAS TO TRAVEL TO GO TO FIRST Y SIDE
+    double delta_dis_x; //DISTANCE RAY HAS TO TRAVEL TO GO TO NEXT X SIDE
+    double delta_dis_y; //DISTANCE RAY HAS TO TRAVEL TO GO TO NEXT Y SIDE
+    int hit;            //DETERMINES IF LOOP ENDS (WAS WALL HIT?)
+    int side;           //WAS THE WALL HIT FROM X SIDE (NS = 0) or Y SIDE (WE = 1)
+    int step_x;        //DIRECTION TO STEP IN X DIRECTION
+    int step_y;        //DIRECTION TO STEP IN Y DIRECTION
+} t_raycast;
 
 typedef struct s_game_data
 {
@@ -145,13 +167,13 @@ char **create_visited_map(t_game_data *data);
 int validate_map_with_dfs(t_game_data *data);
 
 //execution.c
-void init_player_direction(t_game_data *data);
-void raycast(t_game_data *data, t_image *img);
-void move_player(t_game_data *data, double move_x, double move_y);
-void rotate_player(t_game_data *data, double angle);
-int key_press(int keycode, t_game_data *data);
-int game_loop(t_game_data *data);
-int close_window(t_game_data *data);
+// void init_player_direction(t_game_data *data);
+// void raycast(t_game_data *data, t_image *img);
+// void move_player(t_game_data *data, double move_x, double move_y);
+// void rotate_player(t_game_data *data, double angle);
+// int key_press(int keycode, t_game_data *data);
+// int game_loop(t_game_data *data);
+// int close_window(t_game_data *data);
 void start_game(t_game_data *data);
 
 #endif
