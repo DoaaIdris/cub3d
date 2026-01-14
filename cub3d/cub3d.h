@@ -16,6 +16,7 @@
 #define SCREEN_HEIGHT 1080
 #define SPEED 0.10    
 #define ROTATE_SPEED 0.10
+#define MOUSE_ROTATE_SPEED 0.008
 
 typedef struct s_image
 {
@@ -80,6 +81,21 @@ typedef struct s_player
 
 }   t_player;
 
+typedef struct s_wall_tex
+{
+    t_tex	*tex;
+	double	wall_x;
+	int		tex_x
+} t_wall_tex;
+
+typedef struct s_wall_line
+{
+    int line_h;
+	int drawStart;
+	int drawEnd;
+
+}   t_wall_line;
+
 typedef struct s_raycast
 {
     double dir_x;      //RAY DIRECTION
@@ -95,7 +111,11 @@ typedef struct s_raycast
     int side;           //WAS THE WALL HIT FROM X SIDE (EW = 0) or Y SIDE (NS = 1)
     int step_x;        //DIRECTION TO STEP IN X DIRECTION
     int step_y;        //DIRECTION TO STEP IN Y DIRECTION
+    double perp_wall_dist;
+    t_wall_line ver_line;
+
 } t_raycast;
+
 
 typedef struct s_game_data
 {
@@ -115,7 +135,7 @@ typedef struct s_game_data
     t_tex south;
     t_tex east;
     t_tex west;
-    
+
 }   t_game_data;
 
 
