@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	load_texture(t_game_data *data, t_tex *tex, char *path)
 {
@@ -21,8 +21,8 @@ void	load_texture(t_game_data *data, t_tex *tex, char *path)
 	{
 		printf("[ERROR] FAILED TO LOAD TEXTURE: %s\n", path);
 		 // Cleanup 
-        free_2d_array(data.map.map);
-        free_textures(&data);
+        free_2d_array(data->map.map);
+        free_textures(data);
         get_next_line(42);
 		exit(1);
 	}
@@ -62,4 +62,10 @@ t_tex * set_texture(t_game_data *data, t_raycast *raycast)
 			tex = &data->south;
 	}
     return (tex);
+}
+
+//convert rgb to int
+int	rgb_to_int(t_rgb color)
+{
+	return ((color.r << 16) | (color.g << 8) | color.b);
 }

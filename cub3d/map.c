@@ -80,6 +80,6 @@ char **validate_map(t_game_data *data, int fd)
     }
     data->map.height = line_count;
     data->map.width = max_i;
-    printf("the maximum length is........[%d]\n",data->map.width);
+    //printf("the maximum length is........[%d]\n",data->map.width);
     return (data->map.map);
 }

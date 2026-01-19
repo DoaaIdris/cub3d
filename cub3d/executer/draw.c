@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void set_ver_line_height(t_raycast *raycast, t_wall_line *ver_line)
 {
@@ -63,26 +63,24 @@ void draw_wall_texture(t_wall_tex *wall, t_wall_line *line, t_image *img, int x)
 		}
 }
 
-void draw_celing_floor(t_game_data *data, t_image *img, int x)
+
+
+void draw_ceiling_floor(t_game_data *data, t_image *img, int x)
 {
-    // ceiling
-        int y;
-		int color;
-		color = (data->ceiling.r << 16) | (data->ceiling.g << 8) | data->ceiling.b;
-		y = 0;
-		while (y < data->raycast.vertical_line.drawStart)
-		{
-			put_pixel(&img, x, y, color);
-			y++;
-		}
-		// floor
-		color = (data->floor.r << 16) | (data->floor.g << 8) | data->floor.b;
-		y = data->raycast.vertical_line.drawEnd + 1;
-		while (y < SCREEN_HEIGHT)
-		{
-			put_pixel(&img, x, y, color);
-			y++;
-		}
+	int y;
+	int ceiling_color;
+	int floor_color;
+
+	ceiling_color = rgb_to_int(data->ceiling);
+	floor_color = rgb_to_int(data->floor);
+	
+	y = 0;
+	while (y < data->raycast.ver_line.drawStart)
+		put_pixel(img, x, y++, ceiling_color);
+	
+	y = data->raycast.ver_line.drawEnd + 1;
+	while (y < SCREEN_HEIGHT)
+		put_pixel(img, x, y++, floor_color);
 }
 
 void calc_wall_texture(t_game_data *data, t_raycast *raycast, t_wall_tex *wall)

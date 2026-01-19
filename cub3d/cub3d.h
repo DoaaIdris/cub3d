@@ -17,6 +17,11 @@
 #define SPEED 0.10    
 #define ROTATE_SPEED 0.10
 #define MOUSE_ROTATE_SPEED 0.008
+#define MINIMAP_SCALE 10 //1 map cell = 10x10 pixels
+#define MINIMAP_x 20
+#define MINIMAP_y 20
+#define MINIMAP_P_SIZE 4
+#define MINIMAP_DIR_LENGTH 12
 
 typedef struct s_image
 {
@@ -85,7 +90,7 @@ typedef struct s_wall_tex
 {
     t_tex	*tex;
 	double	wall_x;
-	int		tex_x
+	int		tex_x;
 } t_wall_tex;
 
 typedef struct s_wall_line
@@ -127,7 +132,6 @@ typedef struct s_game_data
     t_rgb ceiling;
     t_player player;
     t_raycast raycast;
-    t_image image;
     int first_phase_done;
     int ceiling_set;
     int floor_set;
@@ -174,5 +178,19 @@ int validate_map_with_dfs(t_game_data *data);
 
 //execution.c
 void start_game(t_game_data *data);
+void	load_texture(t_game_data *data, t_tex *tex, char *path);
+void	put_pixel(t_image *img, int x, int y, int color);
+t_tex * set_texture(t_game_data *data, t_raycast *raycast);
+void raycaster(t_game_data *data, t_image img);
+int	key_press(int keycode, t_game_data *data);
+int	close_window(t_game_data *data);
+int	mouse_rotate(int x, int y,  t_game_data *data);
+void	render_game(t_game_data *data);
+void set_ver_line_height(t_raycast *raycast, t_wall_line *ver_line);
+void calc_wall_texture(t_game_data *data, t_raycast *raycast, t_wall_tex *wall);
+void draw_wall_texture(t_wall_tex *wall, t_wall_line *line, t_image *img, int x);
+void draw_ceiling_floor(t_game_data *data, t_image *img, int x);
+void	draw_minimap(t_image *img, t_map map, t_player *player);
+int	rgb_to_int(t_rgb color);
 
 #endif

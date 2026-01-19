@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	render_game(t_game_data *data)
 {
@@ -22,6 +22,9 @@ void	render_game(t_game_data *data)
 
 	//START RAYCASTING
 	raycaster(data, img);
+
+	//draw minimap
+	draw_minimap(&img, data->map, &data->player);
 	
 	// SEND COMPLETE IMAGE TO WINDOW AND DISPLAY IT
 	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
@@ -100,7 +103,7 @@ void	start_game(t_game_data *data)
 	load_texture(data, &data->east,  data->texture.east_texture);
 	load_texture(data, &data->west,  data->texture.west_texture);
 	//INITIALIZE PLAYER DIRECTION AND FOV
-	set_player_direction(data);
+	set_player_dir(data);
 	set_player_fov(data);
 	//RENDER GAME
 	render_game(data);

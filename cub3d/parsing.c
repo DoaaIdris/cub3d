@@ -167,7 +167,8 @@ int validate_map_info(t_game_data *data, char *map_line)
     if (map_line[0] == '\0')
         return (SUCCESS);
     if (first_phase_done(data) == SUCCESS)
-        return (printf("first phase done check\n"),CONTINUE);
+        //return (printf("first phase done check\n"));
+        return (CONTINUE);
     else
         {
             printf("not done..\n");
@@ -205,7 +206,7 @@ char **parse_map(t_game_data *data, char *map)
     int fd;
     char *temp;
 
-    printf("inside parse_map\n");
+    //printf("inside parse_map\n");
     if (!map)
         return (NULL);
     fd = open(map, O_RDONLY);
@@ -219,7 +220,7 @@ char **parse_map(t_game_data *data, char *map)
         temp = data->map.line;
         data->map.line = delete_newlines(data->map.line);
         free(temp);
-        printf("inside data->map.line[%s]\n",data->map.line);
+        //printf("inside data->map.line[%s]\n",data->map.line);
         int i = validate_map_info(data,data->map.line);
         if (i == FAILURE)
         {   
@@ -230,10 +231,10 @@ char **parse_map(t_game_data *data, char *map)
         }
         if (data->first_phase_done && i == CONTINUE)
         {   
-            printf("enters here\n");
+            //printf("enters here\n");
             if (is_valid_first_wall(data->map.line) == SUCCESS)
             {
-                printf("moving on to the second phase....\n");
+                //printf("moving on to the second phase....\n");
                  data->map.map = validate_map(data,fd);
                 //  int j = 0;
                 //  while(data->map.map[j])

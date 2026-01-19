@@ -123,13 +123,13 @@ int validate_map_with_dfs(t_game_data *data)
         printf("[ERROR] Failed to allocate visited map\n");
         return (FAILURE);
     }
-    printf("Starting DFS validation from player position (%f, %f)...\n", 
-           data->player.x, data->player.y);
+    //printf("Starting DFS validation from player position (%f, %f)...\n", 
+    //       data->player.x, data->player.y);
     result = dfs(data, visited, data->player.x, data->player.y);
     free_2d_array(visited);
-    if (result == SUCCESS)
-        printf("✓ Map validation successful - all walkable areas are enclosed!\n");
-    else
-        printf("✗ Map validation failed - map is not properly enclosed\n");
+    // if (result == SUCCESS)
+    //     printf("✓ Map validation successful - all walkable areas are enclosed!\n");
+    // else
+    //     printf("✗ Map validation failed - map is not properly enclosed\n");
     return (result);
 }

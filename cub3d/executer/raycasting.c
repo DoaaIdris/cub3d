@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void dda_loop(t_raycast *raycast, t_map *map)
 {
@@ -89,14 +89,14 @@ void raycaster(t_game_data *data, t_image img)
     x = 0;
     while (x < SCREEN_WIDTH)
 	{
-        init_ray(&data->raycast, &data->player, &x);
+        init_ray(&data->raycast, &data->player, x);
         dda_loop(&data->raycast, &data->map);
 
         set_ver_line_height(&data->raycast, &data->raycast.ver_line);
 		//DRAWING WALL TEXTURES
-		calc_wall_texture(&data, &data->raycast, &wall);
+		calc_wall_texture(data, &data->raycast, &wall);
         draw_wall_texture(&wall, &data->raycast.ver_line, &img, x);
-        draw_ceiling_floor(&data,img, x);
+        draw_ceiling_floor(data, &img, x);
 		x++; //INCREMENT WHILE LOOP
 	}
 }
