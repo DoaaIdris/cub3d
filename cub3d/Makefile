@@ -4,14 +4,18 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -O3
 
 SRCS =  main.c	   \
-		parsing.c	\
+		parser/parsing.c	\
 		free.c		\
 		ft_split.c	\
-		map.c		\
-		dfs.c		\
-		execution.c \
-		execute.c
-
+		parser/map.c		\
+		parser/dfs.c		\
+		executer/draw.c	\
+		executer/execute.c	\
+		executer/execute_utils.c	\
+		executer/game.c	\
+		executer/raycasting.c\
+		minimap.c	\
+		
 GET_NEXT_LINE_SRC = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)

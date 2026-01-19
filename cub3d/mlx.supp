@@ -1,133 +1,51 @@
-#MLX/X11 suppressions for cub3D
 {
-   X11_uninitialized_writev
-   Memcheck:Param
-   writev(vector[0])
-   ...
-   obj:/libX11.so.
-}
-{
-   X11_XOpenDisplay_reachable
+   MLX_Leak_1
    Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:XOpenDisplay
-}
-{
-X11_XkbGetMap_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:XkbGetMap
-}
-{
-   X11_XShmQueryVersion_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:XShmQueryVersion
-}
-{
-   X11_XInternAtom_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:XInternAtom
-}
-{
-   MLX_init_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
    ...
    fun:mlx_init
 }
+
 {
-   X11_XEnq_reachable
+   MLX_Leak_2
    Memcheck:Leak
-   match-leak-kinds: reachable
    ...
-   fun:_XEnq
+   fun:mlx_new_window
 }
+
 {
-   X11_XSync_reachable
+   MLX_Leak_3
    Memcheck:Leak
-   match-leak-kinds: reachable
    ...
-   fun:XSync
+   fun:mlx_xpm_file_to_image
 }
+
 {
-   X11_XPending_reachable
+   MLX_Leak_4
    Memcheck:Leak
-   match-leak-kinds: reachable
    ...
-   fun:XPending
+   obj:*/libmlx*.so*
 }
+
 {
-   MLX_loop_reachable
+   MLX_Leak_5
    Memcheck:Leak
-   match-leak-kinds: reachable
    ...
-   fun:mlx_loop
+   obj:*/libX11.so*
 }
+
 {
-   X11_XShmCreateImage_calloc
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:calloc
+   X11_writev_uninit
+   Memcheck:Param
+   writev(vector[...])
+   fun:writev
+   obj:*/libxcb.so*
    ...
-   fun:XShmCreateImage
 }
+
 {
-   X11_XShmCreateImage_malloc
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
+   X11_writev_vector0
+   Memcheck:Param
+   writev(vector[0])
    ...
-   fun:XShmCreateImage
-}
-{
-   X11_XShmCreateImage_realloc
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:realloc
-   ...
-   fun:XShmCreateImage
-}
-{
-   X11_XCreateImage_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:XCreateImage
-}
-{
-   X11_shmat_reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   ...
-   fun:shmat
-}
-{
-   MLX_int_new_xshm_image_calloc
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:calloc
-   ...
-   fun:mlx_int_new_xshm_image
-}
-{
-   MLX_int_new_xshm_image_malloc
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   ...
-   fun:mlx_int_new_xshm_image
-}
-{
-   MLX_int_new_xshm_image_realloc
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:realloc
-   ...
-   fun:mlx_int_new_xshm_image
+   fun:mlx_*
 }

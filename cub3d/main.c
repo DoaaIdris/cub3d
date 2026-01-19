@@ -62,12 +62,11 @@ int main(int argc, char *argv[])
             return (1);
         }
         
-        printf("✓ Map validation successful! Starting game...\n");
+        //printf("✓ Map validation successful! Starting game...\n");
+        
+        // Start the game execution
         start_game(&data);
         
-        free_2d_array(data.map.map);
-        free_textures(&data);
-        get_next_line(42);
     }
     else
     {
