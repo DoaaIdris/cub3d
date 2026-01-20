@@ -30,22 +30,19 @@ void	set_ver_line_height(t_raycast *ray, t_wall_line *ver_line)
 void	draw_wall_tex(t_wall_tex *wall, t_wall_line *line, t_image *img, int x)
 {
 	double	step;
-	double	tex_pos;
 	int		y;
-	int		tex_y;
 	char	*src;
 	int		color;
 
 	step = 1.0 * wall->tex->height / line->line_h;
-	//tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_h / 2) * step;
-	tex_pos = 0;
+	wall->tex_pos = (line->draw_start - SCREEN_HEIGHT / 2 + line->line_h / 2) * step;
 	y = line->draw_start;
 	while (y <= line->draw_end)
 	{
-		tex_y = (int)tex_pos % wall->tex->height;
-		tex_pos += step;
+		wall->tex_y = (int)wall->tex_pos % wall->tex->height;
+		wall->tex_pos += step;
 		src = wall->tex->image.addr
-			+ (tex_y * wall->tex->image.line_length
+			+ (wall->tex_y * wall->tex->image.line_length
 				+ wall->tex_x * (wall->tex->image.bits_per_pixel / 8));
 		color = *(unsigned int *)src;
 		put_pixel(img, x, y, color);

@@ -101,9 +101,11 @@ typedef struct s_player
 
 typedef struct s_wall_tex
 {
-	t_tex	*tex;
-	double	wall_x;
-	int		tex_x;
+	t_tex	*tex;//TEXTURE ITSELF
+	double	wall_x;//WHERE THE WALL WAS HIT (0.0 to 1.0)
+	int		tex_x;//wHAT COLUMN OF TEXTURE TO USE (x pixel coordinate)
+	int		tex_y;//WHICH ROW OF TEXTURE TO USE (y pixel coordinate)
+	double	tex_pos;
 }	t_wall_tex;
 
 typedef struct s_wall_line
